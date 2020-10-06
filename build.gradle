@@ -1,43 +1,31 @@
-import org.apache.tools.ant.filters.ReplaceTokens
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
 
-buildscript {
-    repositories {
-        jcenter()
-    }
+mainClassName = 'kern.threed.Renderer'
 
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.1.0'
-    }
+// tag::repositories[]
+repositories {
+    mavenCentral()
 }
+// end::repositories[]
 
-allprojects {
-    apply plugin: 'java'
-    apply plugin: 'com.github.johnrengelman.shadow'
-
-    group = pluginGroup
-    version = pluginVersion
-
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-
-    repositories {
-        mavenCentral()
-    }
-
-    processResources {
-        from(sourceSets.main.resources.srcDirs) {
-            filter ReplaceTokens, tokens: [version: version]
-        }
-    }
+// tag::jar[]
+jar {
+    baseName = 'gs-gradle'
+    version =  '0.1.0'
 }
+// end::jar[]
+
+// tag::dependencies[]
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 dependencies {
-    shadow 'com.google.code.findbugs:jsr305:3.0.2'
+    compile "joda-time:joda-time:2.2"
+    testCompile "junit:junit:4.12"
 }
+// end::dependencies[]
 
-shadowJar {
-    classifier = ''
-    configurations = [project.configurations.compile]
-}
-
-build.dependsOn(shadowJar)
+// tag::wrapper[]
+// end::wrapper[]
