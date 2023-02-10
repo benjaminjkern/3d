@@ -9,10 +9,10 @@ import java.util.Random;
 import kern.Animator;
 import kern.Tensor;
 
-public class Demo3D extends Animator {
+public class Renderer extends Animator {
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        Demo3D d = new Demo3D(100, 100, 200);
+        Demo3D d = new Renderer(100, 100, 200);
         d.go();
     }
 
